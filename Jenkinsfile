@@ -7,7 +7,7 @@ pipeline{
         APP_NAME = "WHOIS"
         RELEASE = "1.0.0"
         DOCKER_USER = "yasminebargaoui"
-        DOCKER_PASS = "Yasmouna2020"
+        DOCKER_PASS = "z23FWSa9.+R&yc4"
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         JENKINS_API_TOKEN ="11953212cf01b50628cfa90aa30c868ba8"
