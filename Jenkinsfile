@@ -51,7 +51,7 @@ pipeline{
              stage("build & push docker "){
             steps {
                 script{
-            * //   bat "mvn test" 
+            //   bat "mvn test" 
             /* docker.withRegistry('',DOCKER_PASS){
                 docker_image= docker.build "${IMAGE_NAME}"
              }
