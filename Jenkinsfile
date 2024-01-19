@@ -2,10 +2,7 @@ pipeline{
     agent{
         label "jenkins-agent"
     }
-    tools {
-        jdk 'Java17'
-        maven 'Maven3'
-    }
+   
       environment {
         APP_NAME = "WHOIS"
         RELEASE = "1.0.0"
@@ -15,6 +12,10 @@ pipeline{
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         JENKINS_API_TOKEN ="11953212cf01b50628cfa90aa30c868ba8"
 
+    }
+     tools {
+        jdk 'Java17'
+        maven 'Maven3'
     }
 
         stages{
