@@ -7,4 +7,4 @@ FROM eclipse-temurin:17.0.10-jdk
 WORKDIR /WHOIS
 COPY --from=build /app/target/demoapp.jar /app/
 EXPOSE 8080
-CMD ["java", "-jar","demoapp.jar"]
+CMD npm run start
