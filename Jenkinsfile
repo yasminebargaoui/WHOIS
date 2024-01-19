@@ -6,7 +6,7 @@ pipeline{
       environment {
         APP_NAME = "WHOIS"
         RELEASE = "1.0.0"
-        DOCKER_USER = "yasminenargaoui"
+        DOCKER_USER = "yasminebargaoui"
         DOCKER_PASS = "Yasmouna2020"
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
@@ -51,13 +51,18 @@ pipeline{
              stage("build & push docker "){
             steps {
                 script{
-             //   bat "mvn test" 
-             docker.withRegistry('',DOCKER_PASS){
+            * //   bat "mvn test" 
+            /* docker.withRegistry('',DOCKER_PASS){
                 docker_image= docker.build "${IMAGE_NAME}"
              }
              docker.withRegistry('',DOCKER_PASS){
                 docker_image.push("${IMAGE_TAG}")
-                        docker_image.push('latest')
+                        docker_image.push('latest')*/
+                         docker.withRegistry('https://registry.hub.docker.com', 'DOCKER_PASS') {
+                        def customImage = docker.build("$IMAGE_NAME")
+
+                        /* Push the container to the custom Registry */
+                        customImage.push()
              }
         }
             }
