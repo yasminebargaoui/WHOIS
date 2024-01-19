@@ -49,6 +49,7 @@ pipeline{
         }
              stage("build & push docker "){
             steps {
+                script{
              //   bat "mvn test" 
              docker.withRegistry('',DOCKER_PASS){
                 docker_image= docker.build "${IMAGE_NAME}"
@@ -58,6 +59,7 @@ pipeline{
                         docker_image.push('latest')
              }
         }
+            }
 
         }
         }
