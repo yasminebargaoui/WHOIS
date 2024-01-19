@@ -10,7 +10,7 @@ pipeline{
         DOCKER_PASS = "dockerhub"
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
-        JENKINS_API_TOKEN =credentials("JENKINS_API_TOKEN")
+        JENKINS_API_TOKEN ="11953212cf01b50628cfa90aa30c868ba8"
 
     }
      tools {
@@ -64,12 +64,12 @@ pipeline{
 
                         // Push the container to the custom Registry */
                        customImage.push()
+                 
                          }
              }
                 }
             }
            
-
 }
              }
         }
