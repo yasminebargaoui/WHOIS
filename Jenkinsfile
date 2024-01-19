@@ -7,10 +7,10 @@ pipeline{
         APP_NAME = "WHOIS"
         RELEASE = "1.0.0"
         DOCKER_USER = "yasminebargaoui"
-        DOCKER_PASS = "z23FWSa9.+R&yc4"
+        DOCKER_PASS = "dockerhub"
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
-        JENKINS_API_TOKEN ="11953212cf01b50628cfa90aa30c868ba8"
+        JENKINS_API_TOKEN =credentials("JENKINS_API_TOKEN")
 
     }
      tools {
@@ -49,38 +49,25 @@ pipeline{
 
         }
 
-/*             stage("build & push docker "){
+           stage("build & push docker "){
             steps {
                 script{
             //   bat "mvn test" 
-            /* docker.withRegistry('',DOCKER_PASS){
+             docker.withRegistry('',DOCKER_PASS){
                 docker_image= docker.build "${IMAGE_NAME}"
              }
              docker.withRegistry('',DOCKER_PASS){
                 docker_image.push("${IMAGE_TAG}")
-                        docker_image.push('latest')*/
-                       /*  docker.withRegistry('https://registry.hub.docker.com', 'DOCKER_PASS') {
+                        docker_image.push('latest')
+                         docker.withRegistry('', 'DOCKER_PASS') {
                         def customImage = docker.build("$IMAGE_NAME")
 
-                        /* Push the container to the custom Registry */
-                      //  customImage.push()
-                      stage('Build') {
-steps {
-script{
-     git 'https://github.com/yasminebargaoui/WHOIS'
-     bat 'docker build -t my-image:${BUILD_NUMBER} .'
-}
-}
-                      }
-stage('Push') {
-steps {
-    script{
-withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-bat 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
-bat 'docker push my-image:${BUILD_NUMBER}'
-}
-}
-}
+                        // Push the container to the custom Registry */
+                       customImage.push()
+                         }
+             }
+                }
+
 }
              }
         }
