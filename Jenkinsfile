@@ -68,7 +68,7 @@ pipeline{
 steps {
 script{
      git 'https://github.com/yasminebargaoui/WHOIS'
-     sh 'docker build -t my-image:${BUILD_NUMBER} .'
+     bat 'docker build -t my-image:${BUILD_NUMBER} .'
 }
 }
                       }
@@ -76,8 +76,8 @@ stage('Push') {
 steps {
     script{
 withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
-sh 'docker push my-image:${BUILD_NUMBER}'
+bat 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
+bat 'docker push my-image:${BUILD_NUMBER}'
 }
 }
 }
