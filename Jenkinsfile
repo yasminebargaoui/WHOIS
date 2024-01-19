@@ -48,7 +48,8 @@ pipeline{
         }
 
         }
-             stage("build & push docker "){
+
+/*             stage("build & push docker "){
             steps {
                 script{
             //   bat "mvn test" 
@@ -58,15 +59,29 @@ pipeline{
              docker.withRegistry('',DOCKER_PASS){
                 docker_image.push("${IMAGE_TAG}")
                         docker_image.push('latest')*/
-                         docker.withRegistry('https://registry.hub.docker.com', 'DOCKER_PASS') {
+                       /*  docker.withRegistry('https://registry.hub.docker.com', 'DOCKER_PASS') {
                         def customImage = docker.build("$IMAGE_NAME")
 
                         /* Push the container to the custom Registry */
-                        customImage.push()
+                      //  customImage.push()
+                      stage('Build') {
+steps {
+script{
+     git 'https://github.com/yasminebargaoui/WHOIS'
+     sh 'docker build -t my-image:${BUILD_NUMBER} .'
+}
+}
+                      }
+stage('Push') {
+steps {
+    script{
+withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
+sh 'docker push my-image:${BUILD_NUMBER}'
+}
+}
+}
+}
              }
         }
-            }
-
-        }
-        }
-}
+            
